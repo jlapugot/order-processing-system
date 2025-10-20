@@ -1,0 +1,85 @@
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+bin/
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+*.log.*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Docker
+docker-compose.override.yml
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+.terraform.lock.hcl
+*.tfvars
+!terraform.tfvars.example
+
+# Build artifacts
+*.jar
+*.war
+*.ear
+*.class
+
+# Test coverage
+.coverage
+htmlcov/
+*.cover
+.hypothesis/
+.pytest_cache/
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+
+# Security
+secrets/
+*.pem
+*.key
+credentials.json
+.aws/
+*.p12
+
+# Application specific
+data/
+uploads/
