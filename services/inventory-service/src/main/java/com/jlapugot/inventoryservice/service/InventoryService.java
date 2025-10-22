@@ -127,8 +127,8 @@ public class InventoryService {
         if (newStatus == OrderStatus.SHIPPED) {
             confirmReservedInventory(orderId);
         }
-        // Release inventory if order fails
-        else if (newStatus == OrderStatus.FAILED) {
+        // Release inventory if order is cancelled or fails
+        else if (newStatus == OrderStatus.CANCELLED || newStatus == OrderStatus.FAILED) {
             releaseReservedInventory(orderId);
         }
     }
