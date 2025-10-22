@@ -16,7 +16,6 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +33,7 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
-    private final KafkaTemplate<String, OrderEvent> kafkaTemplate;
+    private final OrderEventPublisher eventPublisher;
 
     private static final String ORDER_CREATED_TOPIC = "order.created";
     private static final String ORDER_UPDATED_TOPIC = "order.updated";
@@ -273,7 +272,7 @@ public class OrderService {
                 correlationId
         );
 
-        kafkaTemplate.send(ORDER_CREATED_TOPIC, order.getId().toString(), event);
+        eventPublisher.publishEvent(ORDER_CREATED_TOPIC, order.getId().toString(), event);
         log.info("Published order.created event for order: {}", order.getId());
     }
 
@@ -287,7 +286,7 @@ public class OrderService {
                 correlationId
         );
 
-        kafkaTemplate.send(ORDER_UPDATED_TOPIC, order.getId().toString(), event);
+        eventPublisher.publishEvent(ORDER_UPDATED_TOPIC, order.getId().toString(), event);
         log.info("Published order.updated event for order: {}", order.getId());
     }
 
@@ -296,7 +295,7 @@ public class OrderService {
 
         OrderEvent event = OrderEvent.cancelled(order.getId(), correlationId);
 
-        kafkaTemplate.send(ORDER_CANCELLED_TOPIC, order.getId().toString(), event);
+        eventPublisher.publishEvent(ORDER_CANCELLED_TOPIC, order.getId().toString(), event);
         log.info("Published order.cancelled event for order: {}", order.getId());
     }
 }

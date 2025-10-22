@@ -21,7 +21,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.kafka.core.KafkaTemplate;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -44,7 +43,7 @@ class OrderServiceTest {
     private OrderMapper orderMapper;
 
     @Mock
-    private KafkaTemplate<String, OrderEvent> kafkaTemplate;
+    private OrderEventPublisher eventPublisher;
 
     @InjectMocks
     private OrderService orderService;
@@ -121,7 +120,7 @@ class OrderServiceTest {
         assertThat(result.getStatus()).isEqualTo(OrderStatus.PENDING);
 
         verify(orderRepository).save(any(Order.class));
-        verify(kafkaTemplate).send(eq("order.created"), eq("1"), any(OrderEvent.class));
+        verify(eventPublisher).publishEvent(eq("order.created"), eq("1"), any(OrderEvent.class));
     }
 
     @Test
@@ -205,7 +204,7 @@ class OrderServiceTest {
         // Then
         assertThat(result).isNotNull();
         verify(orderRepository).save(any(Order.class));
-        verify(kafkaTemplate).send(eq("order.updated"), eq("1"), any(OrderEvent.class));
+        verify(eventPublisher).publishEvent(eq("order.updated"), eq("1"), any(OrderEvent.class));
     }
 
     @Test
@@ -244,7 +243,7 @@ class OrderServiceTest {
         ArgumentCaptor<Order> orderCaptor = ArgumentCaptor.forClass(Order.class);
         verify(orderRepository).save(orderCaptor.capture());
         assertThat(orderCaptor.getValue().getStatus()).isEqualTo(OrderStatus.CANCELLED);
-        verify(kafkaTemplate).send(eq("order.cancelled"), eq("1"), any(OrderEvent.class));
+        verify(eventPublisher).publishEvent(eq("order.cancelled"), eq("1"), any(OrderEvent.class));
     }
 
     @Test
