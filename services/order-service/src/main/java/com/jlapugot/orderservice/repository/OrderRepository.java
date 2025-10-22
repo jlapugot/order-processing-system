@@ -1,7 +1,7 @@
 package com.jlapugot.orderservice.repository;
 
 import com.jlapugot.orderservice.model.Order;
-import com.jlapugot.orderservice.model.OrderStatus;
+import com.jlapugot.common.model.OrderStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

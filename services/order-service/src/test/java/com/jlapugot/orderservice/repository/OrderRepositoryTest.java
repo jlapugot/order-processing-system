@@ -1,7 +1,7 @@
 package com.jlapugot.orderservice.repository;
 
 import com.jlapugot.orderservice.model.Order;
-import com.jlapugot.orderservice.model.OrderStatus;
+import com.jlapugot.common.model.OrderStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

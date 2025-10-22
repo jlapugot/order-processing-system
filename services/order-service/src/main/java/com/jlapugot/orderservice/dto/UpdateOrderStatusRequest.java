@@ -1,6 +1,6 @@
 package com.jlapugot.orderservice.dto;
 
-import com.jlapugot.orderservice.model.OrderStatus;
+import com.jlapugot.common.model.OrderStatus;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

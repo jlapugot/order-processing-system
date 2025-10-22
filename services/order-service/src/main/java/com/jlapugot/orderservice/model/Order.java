@@ -1,5 +1,6 @@
 package com.jlapugot.orderservice.model;
 
+import com.jlapugot.common.model.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

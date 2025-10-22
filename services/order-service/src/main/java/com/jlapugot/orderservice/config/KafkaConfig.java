@@ -1,6 +1,6 @@
 package com.jlapugot.orderservice.config;
 
-import com.jlapugot.orderservice.event.OrderEvent;
+import com.jlapugot.common.events.OrderEvent;
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;

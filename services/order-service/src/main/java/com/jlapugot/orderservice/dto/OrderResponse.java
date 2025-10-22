@@ -1,7 +1,7 @@
 package com.jlapugot.orderservice.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.jlapugot.orderservice.model.OrderStatus;
+import com.jlapugot.common.model.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

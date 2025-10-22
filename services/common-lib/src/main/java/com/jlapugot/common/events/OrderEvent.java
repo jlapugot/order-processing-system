@@ -1,7 +1,6 @@
-package com.jlapugot.orderservice.event;
+package com.jlapugot.common.events;
 
-import com.jlapugot.common.events.BaseEvent;
-import com.jlapugot.orderservice.model.OrderStatus;
+import com.jlapugot.common.model.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

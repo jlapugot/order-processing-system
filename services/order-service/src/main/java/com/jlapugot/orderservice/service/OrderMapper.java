@@ -3,7 +3,7 @@ package com.jlapugot.orderservice.service;
 import com.jlapugot.orderservice.dto.CreateOrderRequest;
 import com.jlapugot.orderservice.dto.OrderResponse;
 import com.jlapugot.orderservice.model.Order;
-import com.jlapugot.orderservice.model.OrderStatus;
+import com.jlapugot.common.model.OrderStatus;
 import org.springframework.stereotype.Component;
 
 /**

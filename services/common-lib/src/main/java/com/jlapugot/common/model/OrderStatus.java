@@ -1,4 +1,4 @@
-package com.jlapugot.orderservice.model;
+package com.jlapugot.common.model;
 
 /**
  * Enumeration of possible order states in the order lifecycle.

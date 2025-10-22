@@ -1,7 +1,7 @@
 package com.jlapugot.orderservice.service;
 
 import com.jlapugot.common.utils.CorrelationIdUtils;
-import com.jlapugot.orderservice.event.OrderEvent;
+import com.jlapugot.common.events.OrderEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.core.KafkaTemplate;

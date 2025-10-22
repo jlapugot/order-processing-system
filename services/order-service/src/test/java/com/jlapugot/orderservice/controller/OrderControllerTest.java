@@ -5,7 +5,7 @@ import com.jlapugot.common.exceptions.ResourceNotFoundException;
 import com.jlapugot.orderservice.dto.CreateOrderRequest;
 import com.jlapugot.orderservice.dto.OrderResponse;
 import com.jlapugot.orderservice.dto.UpdateOrderStatusRequest;
-import com.jlapugot.orderservice.model.OrderStatus;
+import com.jlapugot.common.model.OrderStatus;
 import com.jlapugot.orderservice.service.OrderService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

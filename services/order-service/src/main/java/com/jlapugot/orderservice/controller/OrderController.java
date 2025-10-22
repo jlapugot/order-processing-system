@@ -3,7 +3,7 @@ package com.jlapugot.orderservice.controller;
 import com.jlapugot.orderservice.dto.CreateOrderRequest;
 import com.jlapugot.orderservice.dto.OrderResponse;
 import com.jlapugot.orderservice.dto.UpdateOrderStatusRequest;
-import com.jlapugot.orderservice.model.OrderStatus;
+import com.jlapugot.common.model.OrderStatus;
 import com.jlapugot.orderservice.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
