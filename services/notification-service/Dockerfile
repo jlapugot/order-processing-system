@@ -1,4 +1,4 @@
-# Multi-stage Dockerfile for Order Service
+# Multi-stage Dockerfile for Notification Service
 
 # Stage 1: Build
 FROM maven:3.9-eclipse-temurin-17 AS build
@@ -7,14 +7,14 @@ WORKDIR /app
 # Copy all necessary files for dependency resolution
 COPY pom.xml .
 COPY services/common-lib/pom.xml services/common-lib/pom.xml
-COPY services/order-service/pom.xml services/order-service/pom.xml
+COPY services/notification-service/pom.xml services/notification-service/pom.xml
 
-# Copy source code (needed for go-offline to work properly)
+# Copy source code (needed for build)
 COPY services/common-lib/src services/common-lib/src
-COPY services/order-service/src services/order-service/src
+COPY services/notification-service/src services/notification-service/src
 
 # Build the application (skip tests for faster builds)
-RUN mvn clean package -pl services/order-service -am -DskipTests
+RUN mvn clean package -pl services/notification-service -am -DskipTests
 
 # Stage 2: Runtime
 FROM eclipse-temurin:17-jre-alpine
@@ -25,7 +25,7 @@ RUN addgroup -g 1001 appuser && \
     adduser -D -u 1001 -G appuser appuser
 
 # Copy JAR from build stage
-COPY --from=build /app/services/order-service/target/*.jar app.jar
+COPY --from=build /app/services/notification-service/target/*.jar app.jar
 
 # Change ownership
 RUN chown -R appuser:appuser /app
@@ -33,12 +33,8 @@ RUN chown -R appuser:appuser /app
 # Switch to non-root user
 USER appuser
 
-# Expose port
-EXPOSE 8080
-
-# Health check
-HEALTHCHECK --interval=30s --timeout=3s --start-period=60s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:8080/actuator/health || exit 1
+# Expose port (notification service doesn't expose HTTP, but keeping for consistency)
+EXPOSE 8082
 
 # JVM options for container
 ENV JAVA_OPTS="-XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -XX:InitialRAMPercentage=50.0"
