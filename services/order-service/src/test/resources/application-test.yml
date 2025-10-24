@@ -39,3 +39,25 @@ logging:
     com.jlapugot: DEBUG
     org.springframework: WARN
     org.hibernate: WARN
+
+# Resilience4j - Test configuration with shorter durations for faster tests
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 3
+        permittedNumberOfCallsInHalfOpenState: 2
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 2s
+        failureRateThreshold: 50
+        eventConsumerBufferSize: 10
+    instances:
+      inventoryService:
+        baseConfig: default
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 3
+        failureRateThreshold: 50
+        waitDurationInOpenState: 2s
+        permittedNumberOfCallsInHalfOpenState: 2
