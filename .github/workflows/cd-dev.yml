@@ -1,9 +1,10 @@
 name: CD - Deploy to Development
 
 on:
-  push:
-    branches:
-      - main
+  # Automatic deployment disabled to avoid AWS costs for portfolio project
+  # push:
+  #   branches:
+  #     - main
   workflow_dispatch:
 
 env:
