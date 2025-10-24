@@ -27,7 +27,7 @@ jobs:
     - name: Build Order Service image for scanning
       uses: docker/build-push-action@v5
       with:
-        context: ./services/order-service
+        context: .
         file: ./services/order-service/Dockerfile
         load: true
         tags: order-service:scan
@@ -54,7 +54,7 @@ jobs:
     - name: Build Inventory Service image for scanning
       uses: docker/build-push-action@v5
       with:
-        context: ./services/inventory-service
+        context: .
         file: ./services/inventory-service/Dockerfile
         load: true
         tags: inventory-service:scan
@@ -81,7 +81,7 @@ jobs:
     - name: Build Notification Service image for scanning
       uses: docker/build-push-action@v5
       with:
-        context: ./services/notification-service
+        context: .
         file: ./services/notification-service/Dockerfile
         load: true
         tags: notification-service:scan

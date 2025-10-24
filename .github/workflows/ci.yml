@@ -147,7 +147,7 @@ jobs:
     - name: Build Order Service Docker image
       uses: docker/build-push-action@v5
       with:
-        context: ./services/order-service
+        context: .
         file: ./services/order-service/Dockerfile
         push: false
         tags: order-service:${{ github.sha }}
@@ -157,7 +157,7 @@ jobs:
     - name: Build Inventory Service Docker image
       uses: docker/build-push-action@v5
       with:
-        context: ./services/inventory-service
+        context: .
         file: ./services/inventory-service/Dockerfile
         push: false
         tags: inventory-service:${{ github.sha }}
@@ -167,7 +167,7 @@ jobs:
     - name: Build Notification Service Docker image
       uses: docker/build-push-action@v5
       with:
-        context: ./services/notification-service
+        context: .
         file: ./services/notification-service/Dockerfile
         push: false
         tags: notification-service:${{ github.sha }}
