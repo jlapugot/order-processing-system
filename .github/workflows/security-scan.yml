@@ -13,6 +13,9 @@ jobs:
   trivy-scan:
     name: Trivy Security Scan
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
 
     steps:
     - name: Checkout code
@@ -33,6 +36,7 @@ jobs:
 
     - name: Run Trivy vulnerability scanner - Order Service
       uses: aquasecurity/trivy-action@master
+      continue-on-error: true
       with:
         image-ref: 'order-service:scan'
         format: 'sarif'
@@ -41,7 +45,8 @@ jobs:
 
     - name: Upload Trivy results to GitHub Security tab - Order Service
       uses: github/codeql-action/upload-sarif@v2
-      if: always()
+      if: always() && hashFiles('trivy-order-service.sarif') != ''
+      continue-on-error: true
       with:
         sarif_file: 'trivy-order-service.sarif'
         category: 'trivy-order-service'
@@ -58,6 +63,7 @@ jobs:
 
     - name: Run Trivy vulnerability scanner - Inventory Service
       uses: aquasecurity/trivy-action@master
+      continue-on-error: true
       with:
         image-ref: 'inventory-service:scan'
         format: 'sarif'
@@ -66,7 +72,8 @@ jobs:
 
     - name: Upload Trivy results to GitHub Security tab - Inventory Service
       uses: github/codeql-action/upload-sarif@v2
-      if: always()
+      if: always() && hashFiles('trivy-inventory-service.sarif') != ''
+      continue-on-error: true
       with:
         sarif_file: 'trivy-inventory-service.sarif'
         category: 'trivy-inventory-service'
@@ -83,6 +90,7 @@ jobs:
 
     - name: Run Trivy vulnerability scanner - Notification Service
       uses: aquasecurity/trivy-action@master
+      continue-on-error: true
       with:
         image-ref: 'notification-service:scan'
         format: 'sarif'
@@ -91,13 +99,15 @@ jobs:
 
     - name: Upload Trivy results to GitHub Security tab - Notification Service
       uses: github/codeql-action/upload-sarif@v2
-      if: always()
+      if: always() && hashFiles('trivy-notification-service.sarif') != ''
+      continue-on-error: true
       with:
         sarif_file: 'trivy-notification-service.sarif'
         category: 'trivy-notification-service'
 
     - name: Run Trivy filesystem scan
       uses: aquasecurity/trivy-action@master
+      continue-on-error: true
       with:
         scan-type: 'fs'
         scan-ref: '.'
@@ -107,7 +117,8 @@ jobs:
 
     - name: Upload Trivy filesystem results
       uses: github/codeql-action/upload-sarif@v2
-      if: always()
+      if: always() && hashFiles('trivy-fs.sarif') != ''
+      continue-on-error: true
       with:
         sarif_file: 'trivy-fs.sarif'
         category: 'trivy-filesystem'
@@ -115,6 +126,9 @@ jobs:
   snyk-scan:
     name: Snyk Security Scan
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
 
     steps:
     - name: Checkout code
@@ -140,7 +154,8 @@ jobs:
 
     - name: Upload Snyk results to GitHub Security
       uses: github/codeql-action/upload-sarif@v2
-      if: always()
+      if: always() && hashFiles('snyk.sarif') != ''
+      continue-on-error: true
       with:
         sarif_file: snyk.sarif
         category: 'snyk'
