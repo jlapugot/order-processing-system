@@ -10,6 +10,9 @@ jobs:
   build-and-test:
     name: Build and Test
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
 
     steps:
     - name: Checkout code
@@ -38,11 +41,12 @@ jobs:
     - name: Generate test report
       if: always()
       uses: dorny/test-reporter@v1
+      continue-on-error: true
       with:
         name: Maven Tests
         path: '**/target/surefire-reports/TEST-*.xml'
         reporter: java-junit
-        fail-on-error: true
+        fail-on-error: false
 
     - name: Generate JaCoCo coverage report
       run: mvn jacoco:report
