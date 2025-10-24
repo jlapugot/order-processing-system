@@ -4,12 +4,14 @@
 FROM maven:3.9-eclipse-temurin-17 AS build
 WORKDIR /app
 
-# Copy all necessary files for dependency resolution
+# Copy parent POM and all module POMs (parent POM references all modules)
 COPY pom.xml .
 COPY services/common-lib/pom.xml services/common-lib/pom.xml
+COPY services/order-service/pom.xml services/order-service/pom.xml
 COPY services/inventory-service/pom.xml services/inventory-service/pom.xml
+COPY services/notification-service/pom.xml services/notification-service/pom.xml
 
-# Copy source code (needed for build)
+# Copy source code for common-lib and inventory-service
 COPY services/common-lib/src services/common-lib/src
 COPY services/inventory-service/src services/inventory-service/src
 
